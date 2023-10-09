@@ -80,20 +80,20 @@ elapsed_time = end_time - start_time
 print(f"Elapsed time: {elapsed_time} seconds")
 
 # Soup text files
-# Create a zip file to store the BeautifulSoup objects
-with zipfile.ZipFile('eu_plenary_session_crisis.zip', 'w', zipfile.ZIP_DEFLATED) as zipf:
-    # For the list of BeautifulSoup objects called 'crisis_press_release_soup'
-    for idx, soup in enumerate(crisis_press_release_soup):
-        # Serialize the BeautifulSoup object to a string
-        soup_str = str(soup)
-        idx = idx + 1
+# Iterate through the list
+for idx, soup in enumerate(crisis_press_release_soup):
+    # Serialize the BeautifulSoup object to a string
+    soup_str = str(soup)
+    idx = idx + 1
 
-        # Define a filename based on the index
-        filename = f"eu_plenary_session_crisis_{idx}.txt"
+    # Define a filename based on the index
+    filename = f"2_{idx}.txt"
 
-        # Add the serialized soup string as a new file in the zip archive
-        zipf.writestr(filename, soup_str)
+    # Write the serialized soup to a text file
+    with open(filename, "w", encoding="utf-8") as text_file:
+        text_file.write(soup_str)
 
-        print(f"Saved {filename} to zip file")
+    print(f"Saved {filename}")
 
-print("Serialization and saving to zip file complete.")
+print("Serialization and saving complete.")
+

@@ -25,7 +25,7 @@ crisis_press_release_soup = [] # Stores the HTML content of each press release
 
 print("Starting with url=" + str(urls))
 
-while len(crisis_press_releases) < 10:
+while len(crisis_press_releases) < 2:
 
     try:
         # Sort the list using the custom sorting key
@@ -77,20 +77,19 @@ elapsed_time = end_time - start_time
 print(f"Elapsed time: {elapsed_time} seconds")
 
 # Soup text files
-# Create a zip file to store the BeautifulSoup objects
-with zipfile.ZipFile('un_press_release_crisis.zip', 'w', zipfile.ZIP_DEFLATED) as zipf:
-    # For the list of BeautifulSoup objects called 'crisis_press_release_soup'
-    for idx, soup in enumerate(crisis_press_release_soup):
-        # Serialize the BeautifulSoup object to a string
-        soup_str = str(soup)
-        idx = idx + 1
+# Iterate through the list
+for idx, soup in enumerate(crisis_press_release_soup):
+    # Serialize the BeautifulSoup object to a string
+    soup_str = str(soup)
+    idx = idx + 1
 
-        # Define a filename based on the index
-        filename = f"un_press_release_crisis_{idx}.txt"
+    # Define a filename based on the index
+    filename = f"1_{idx}.txt"
 
-        # Add the serialized soup string as a new file in the zip archive
-        zipf.writestr(filename, soup_str)
+    # Write the serialized soup to a text file
+    with open(filename, "w", encoding="utf-8") as text_file:
+        text_file.write(soup_str)
 
-        print(f"Saved {filename} to zip file")
+    print(f"Saved {filename}")
 
-print("Serialization and saving to zip file complete.")
+print("Serialization and saving complete.")
